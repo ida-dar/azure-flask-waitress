@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskwaitress-deployment
+  labels:
+    app: flaskwaitress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskwaitress
+  template:
+    metadata:
+      labels:
+        app: flaskwaitress
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: flaskwaitress
+          image: flaskwaitress.azurecr.io/flaskwaitress:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 1m
+              memory: 200Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaskwaitress
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: flaskwaitress
+  type: LoadBalancer

@@ -29,4 +29,4 @@ def get_data():
 
 
 if __name__ == '__main__':
-  serve(app, host='0.0.0.0', listen='*:80')
+  serve(app, listen='*:80')
