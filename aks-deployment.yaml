@@ -18,10 +18,10 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: flaskwaitress
-          image: flaskwaitress.azurecr.io/flaskwaitress:latest
+          image: flaskwappwaitress.azurecr.io/flaskwaitress:latest
           imagePullPolicy: Never
           ports:
-            - containerPort: 8000
+            - containerPort: 80
           resources:
             requests:
               cpu: 1m
